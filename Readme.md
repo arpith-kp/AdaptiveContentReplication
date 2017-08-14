@@ -3,15 +3,15 @@
 ### Adaptive Content Replication(ACR)
 
   - ACR, an easy to depoly adaptive replication sheme that provides highly available videos by autoscaling infrastructure to handle future requests.
-  - ACR helps to predict popularity of video before it even becomes trading & provides better user expectations from CDN by promising higher QoS.
+  - ACR helps to predict popularity of video before it even becomes trending & provides better user expectations from CDN by promising higher QoS.
 
 #### How it works
- 1. *Datasets* : Uses popularity growth curve from Youtube historical report API for numerous videos.
- 2. *Learning Model*: Uses Recurrent Neural Networks(RNN) to analyse patten over time series data and provides forecast on videos at real time.
+ 1. *Datasets* : Used popularity growth curve from Youtube historical report API from numerous popular videos.
+ 2. *Learning Model*: Used Recurrent Neural Networks(RNN) to analyse patten over time series data and provides forecast on videos at real time.
  3. *Autoscaling*:  Infrastructure from servers to Kafka brokers are autoscaled based on forecast result, there by foreseeing possible issues or handling future requests at scale.
 
-##### Architecture diagrams
-![Architecture](https://github.com/arpith-kp/BotUsageDemo/blob/master/LearnignPredicting.png)
+##### Architecture & Demo
+![Architecture](https://github.com/arpith-kp/ACR/blob/master/LearnignPredicting.png)
 ![Demo](https://github.com/arpith-kp/ACR/blob/master/Demo.gif)
 
 ##### Tech stack
@@ -32,7 +32,7 @@ Now the problem I'm trying to solve narrows down given higly viewed videos over 
 
 The network has visible layer of 1 input, 100 hidden layer and 1 output. Network is trained for 1000 epoch, with mean squared error and Adam optimiser. Once we have train data, we can use this to analyse any realtime video metrics. I've used **Spearman's rank correlation** to compare result and get probability of new videos.
 
-Video metrics are streamed in real time to Kafka from various producer and consumer batches these stream into batches and passes it into Prediction model to get possibility of any videos going to be viral. If so, since Kafka runs on Docker instance I can easily spin up & down Kafka nodes by dynamically modifying BrokerId and BrokerListener and updating it. 
+Video metrics are streamed in real time to Kafka from various producer and consumer batches these stream and passes it into Prediction model to get possibility of a video going to be trending. If so, since Kafka runs on Docker instance I can easily spin up & down Kafka nodes by dynamically modifying BrokerId and BrokerListener and updating it. 
 
 ###### References:
 
